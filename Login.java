@@ -109,7 +109,7 @@ public class Login extends javax.swing.JFrame {
         Statement stmt=con.createStatement();
         System.out.println("Connected");
         ResultSet rs = stmt.executeQuery("select password from person where regno = "+reg);
-        rs.next();
+        rs.first();
         String pass1=rs.getString("password");
         System.out.println(pass1);
         if(pass.equals(pass1))

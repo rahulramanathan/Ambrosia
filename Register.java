@@ -206,19 +206,22 @@ public class Register extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             con=(Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/Ambrosia","root","03Rishab");
             stmt=con.createStatement();
-            String pass=jPasswordField1.getText();                  
-            String conpass=jPasswordField2.getText();            
-            if(pass.equals(conpass))            
+            String pass=jPasswordField1.getText();   
+            System.out.println(pass);            
+            String conpass=jPasswordField2.getText();
+            System.out.println(conpass);
+            if(pass.equals(conpass))   //valid
             {            
                 String query = "insert into person values ("+jTextField1.getText()+",'"+jTextField2.getText()+"',"+jTextField3.getText()+",'"+jComboBox1.getItemAt(jComboBox1.getSelectedIndex())+"',"+jTextField5.getText()+","+jTextField7.getText()+","+jTextField8.getText()+","+jTextField9.getText()+",'"+pass+"')";
                 stmt.executeUpdate(query);
+                System.out.println("Success");
                 Registered obj=new Registered("R");
                 obj.setVisible(true);
             }
-            else
+            else//try again
             {
                 TryAgain obj=new TryAgain();
-                obj.setVisible(true);
+                obj.setVisible(true);                
             }
         }
         catch(Exception e)
