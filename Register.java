@@ -206,22 +206,40 @@ public class Register extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             con=(Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/Ambrosia","root","03Rishab");
             stmt=con.createStatement();
-            String pass=jPasswordField1.getText();   
-            System.out.println(pass);            
-            String conpass=jPasswordField2.getText();
-            System.out.println(conpass);
+            String pass=jPasswordField1.getText();                      
+            String conpass=jPasswordField2.getText();            
             if(pass.equals(conpass))   //valid
-            {            
-                String query = "insert into person values ("+jTextField1.getText()+",'"+jTextField2.getText()+"',"+jTextField3.getText()+",'"+jComboBox1.getItemAt(jComboBox1.getSelectedIndex())+"',"+jTextField5.getText()+","+jTextField7.getText()+","+jTextField8.getText()+","+jTextField9.getText()+",'"+pass+"')";
-                stmt.executeUpdate(query);
-                System.out.println("Success");
+            {               
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/Ambrosia","root","03Rishab");
+                Statement stmt=con.createStatement();        
+                ResultSet rs = stmt.executeQuery("select curdate()");
+                rs.first();
+                String curdate=rs.getString("curdate()");
+                double target_weight=Double.parseDouble(jTextField7.getText());
+                double current_weight=Double.parseDouble(jTextField8.getText());
+                int target_months=Integer.parseInt(jTextField9.getText());
+                double x=(target_weight-current_weight)/30;
+                String gender=jComboBox1.getItemAt(jComboBox1.getSelectedIndex());                                
+                int reservoir;
+                if(gender.equals("Male"))
+                {//2200                    
+                    reservoir=(int)((2200-x)*target_months);
+                }
+                else
+                {//1800                    
+                    reservoir=(int)((1800-x)*target_months);
+                }
+                String query = "insert into person values ("+jTextField1.getText()+",'"+jTextField2.getText()+"',"+jTextField3.getText()+",'"+gender+"',"+jTextField5.getText()+","+jTextField7.getText()+","+jTextField8.getText()+","+jTextField9.getText()+",'"+pass+"','"+curdate+"',"+reservoir+")";
+                stmt.executeUpdate(query);                
                 Registered obj=new Registered("R");
                 obj.setVisible(true);
+                this.setVisible(false);
             }
             else//try again
             {
                 TryAgain obj=new TryAgain();
-                obj.setVisible(true);                
+                obj.setVisible(true);
             }
         }
         catch(Exception e)

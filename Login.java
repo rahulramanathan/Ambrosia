@@ -102,25 +102,24 @@ public class Login extends javax.swing.JFrame {
         try
         {
         String reg=jTextField1.getText();
-        String pass=jPasswordField1.getText();
-        System.out.println(pass);
+        String pass=jPasswordField1.getText();        
         Class.forName("com.mysql.jdbc.Driver");
         Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/Ambrosia","root","03Rishab");
-        Statement stmt=con.createStatement();
-        System.out.println("Connected");
+        Statement stmt=con.createStatement();        
         ResultSet rs = stmt.executeQuery("select password from person where regno = "+reg);
         rs.first();
         String pass1=rs.getString("password");
-        System.out.println(pass1);
         if(pass.equals(pass1))
         {
             Registered obj=new Registered("L");
             obj.setVisible(true);
+            this.setVisible(false);
         }
         else
         {
             TryAgain obj=new TryAgain();
             obj.setVisible(true);
+            this.setVisible(false);
         }
         }
         catch(Exception e)
@@ -135,6 +134,7 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         Register c=new Register();
         c.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

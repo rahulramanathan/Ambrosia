@@ -28,7 +28,7 @@ public class Registered extends javax.swing.JFrame {
         else if(s.equals("L"))
         {
             jLabel1.setText("Successfully Logged In");
-        }
+        }        
         this.setVisible(true);
     }
     /**
@@ -83,6 +83,19 @@ public class Registered extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //Go To daily meny frame
+        String message=jLabel1.getText();
+        if(message.equals("Successfully Registered"))
+        {
+            Login obj=new Login();
+            obj.setVisible(true);
+            this.setVisible(false);
+        }
+        else
+        {            
+            Food_Menu obj=new Food_Menu();
+            obj.setVisible(true);
+            this.setVisible(false);
+        }        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
