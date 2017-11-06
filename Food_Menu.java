@@ -79,6 +79,7 @@ public class Food_Menu extends javax.swing.JFrame {
                     cs= stmt1.executeQuery("select * from calories where item = '" + items[i-2]+"'");
                     cs.first();
                     calories[i-2] = cs.getInt("cal");
+                    System.out.println(i);
                 }
                 System.out.println(days);
                 calculation();
@@ -425,7 +426,7 @@ public class Food_Menu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-            Review obj = new Review(regno);
+            Review obj = new Review(regno,(int)this.consume);
             obj.main_display();
             obj.setVisible(true);
             this.setVisible(false);
