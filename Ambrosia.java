@@ -9,7 +9,7 @@ package ambrosia;
  *
  * @author rahul
  */
-public class Ambrosia 
+public class Ambrosia
 {
     /**
      * @param args the command line arguments

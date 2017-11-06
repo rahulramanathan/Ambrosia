@@ -215,24 +215,26 @@ public class Register extends javax.swing.JFrame {
                 Statement stmt=con.createStatement();        
                 ResultSet rs = stmt.executeQuery("select curdate()");
                 rs.first();
-                String curdate=rs.getString("curdate()");
+                String curdate=rs.getString("curdate()");                
                 double target_weight=Double.parseDouble(jTextField7.getText());
                 double current_weight=Double.parseDouble(jTextField8.getText());
                 int target_months=Integer.parseInt(jTextField9.getText());
-                double x=(target_weight-current_weight)/30;
-                String gender=jComboBox1.getItemAt(jComboBox1.getSelectedIndex());                                
-                int reservoir;
+                float x=(float)((target_weight-current_weight)/(30*target_months))*7716;//no of cal to lose per day
+                String gender=jComboBox1.getItemAt(jComboBox1.getSelectedIndex());
+                float reservoir;
+                System.out.println(x);
+                System.out.println((target_weight-current_weight)/(30*target_months));
                 if(gender.equals("Male"))
-                {//2200                    
-                    reservoir=(int)((2200-x)*target_months);
+                {//2200
+                    reservoir=(2200-x)*target_months*30;//this gives no of calories to consume per day to achieve target
                 }
                 else
                 {//1800                    
-                    reservoir=(int)((1800-x)*target_months);
+                    reservoir=(1800-x)*target_months*30;
                 }
                 String query = "insert into person values ("+jTextField1.getText()+",'"+jTextField2.getText()+"',"+jTextField3.getText()+",'"+gender+"',"+jTextField5.getText()+","+jTextField7.getText()+","+jTextField8.getText()+","+jTextField9.getText()+",'"+pass+"','"+curdate+"',"+reservoir+")";
-                stmt.executeUpdate(query);                
-                Registered obj=new Registered("R");
+                stmt.executeUpdate(query);
+                Registered obj=new Registered("R",reservoir,Integer.parseInt(jTextField1.getText()));
                 obj.setVisible(true);
                 this.setVisible(false);
             }

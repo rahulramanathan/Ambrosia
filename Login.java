@@ -5,12 +5,12 @@
  */
 package ambrosia;
 import java.sql.*;
+import java.util.Calendar;
 /**
  *
  * @author rahul
  */
 public class Login extends javax.swing.JFrame {
-
     /**
      * Creates new form Login
      */
@@ -106,12 +106,26 @@ public class Login extends javax.swing.JFrame {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con=(Connection)DriverManager.getConnection("jdbc:mysql://localhost:3306/Ambrosia","root","03Rishab");
         Statement stmt=con.createStatement();        
-        ResultSet rs = stmt.executeQuery("select password from person where regno = "+reg);
+        ResultSet rs = stmt.executeQuery("select targmonths,curdate(),date_join,password,reservoir from person where regno = "+reg);
+        int regno=Integer.parseInt(reg.trim());
         rs.first();
         String pass1=rs.getString("password");
+        float consume=rs.getFloat("reservoir");
+        int targetmonths=rs.getInt("targmonths");
+        java.util.Date d1=rs.getDate("date_join");
+        java.util.Date d2=rs.getDate("curdate()");
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(d1);
+        cal.add(Calendar.MONTH,targetmonths);
+        d1=cal.getTime();//end date
+        cal.setTime(d2);
+        d2=cal.getTime();
+        long difference = d1.getTime() - d2.getTime();
+        int days = (int) (difference/ (1000*60*60*24));
+System.out.println(consume/days);
         if(pass.equals(pass1))
         {
-            Registered obj=new Registered("L");
+            Registered obj=new Registered("L",consume/days,regno);
             obj.setVisible(true);
             this.setVisible(false);
         }

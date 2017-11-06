@@ -10,16 +10,18 @@ package ambrosia;
  * @author rahul
  */
 public class Registered extends javax.swing.JFrame {
-
+float consume;
+int regno;
     /**
      * Creates new form Registered
      */
     public Registered() {
         initComponents();
     }
-    public Registered(String s)
+    public Registered(String s,float consume,int regno)
     {
         initComponents();
+        this.regno=regno;
         if(s.equals("R"))
         {
             
@@ -29,6 +31,7 @@ public class Registered extends javax.swing.JFrame {
         {
             jLabel1.setText("Successfully Logged In");
         }        
+        this.consume=consume;
         this.setVisible(true);
     }
     /**
@@ -91,8 +94,9 @@ public class Registered extends javax.swing.JFrame {
             this.setVisible(false);
         }
         else
-        {            
-            Food_Menu obj=new Food_Menu();
+        {   //successful login         
+            Food_Menu obj=new Food_Menu(regno,this.consume);
+            obj.main_display();
             obj.setVisible(true);
             this.setVisible(false);
         }        
