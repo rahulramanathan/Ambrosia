@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package ambrosia;
-
 /**
  *
  * @author rahul
@@ -17,7 +16,7 @@ public class Ambrosia
     public static void main(String[] args) 
     {
         // TODO code application logic here
-        Login obj=new Login();
+        start obj=new start();
         obj.setVisible(true);
     }
 }
