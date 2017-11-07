@@ -54,7 +54,7 @@ public void actionPerformed(ActionEvent e){
         jLabel2.setText("AMBROSIA");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Version 1.0");
+        jLabel3.setText("Version 1.7");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ambrosia/calorie-calculator-main.jpg"))); // NOI18N
 

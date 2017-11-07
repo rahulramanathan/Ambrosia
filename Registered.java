@@ -48,6 +48,7 @@ int regno;
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registered");
 
         jLabel1.setText("Success");
 
